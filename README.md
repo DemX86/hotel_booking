@@ -13,5 +13,8 @@
 - Retrofit
 - Подход Clean Architecture
 
+### Скриншоты
+![Screenshots](resources/app_screenshots.png)
+
 ### Видео работы приложения
-[Смотреть](https://drive.google.com/file/d/1kDAyTl9yVmmd4uSQtxs9M--078dkimdT/view)
+[→ Смотреть](https://drive.google.com/file/d/1kDAyTl9yVmmd4uSQtxs9M--078dkimdT/view)
