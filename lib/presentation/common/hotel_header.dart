@@ -31,6 +31,7 @@ class HotelHeader extends StatelessWidget {
         Text(hotelName, style: Styles.title),
         const SizedBox(height: 8),
         Material(
+          color: Colors.white,
           child: InkWell(
             onTap: onAddressTap,
             child: Text(hotelAddress, style: Styles.address),
