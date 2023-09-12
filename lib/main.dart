@@ -24,4 +24,3 @@ class App extends StatelessWidget {
 }
 
 // TODO i18
-// TODO README
