@@ -73,8 +73,9 @@ class _TouristInfoState extends State<TouristInfo> {
   Widget build(BuildContext context) {
     final lc = AppLocalizations.of(context)!;
     return SectionPlate(
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 500),
+      child: AnimatedSize(
+        alignment: Alignment.topCenter,
+        duration: const Duration(milliseconds: 400),
         curve: Curves.easeInOutCubicEmphasized,
         child: Column(
           children: [

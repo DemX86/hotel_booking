@@ -85,9 +85,7 @@ class _OrderScreenState extends State<OrderScreen> {
                     ),
                     Form(
                       key: _formKey,
-                      child: Column(
-                        children: _tourists(lc, orderCubit: orderCubit),
-                      ),
+                      child: _tourists(lc, orderCubit: orderCubit),
                     ),
                     AddTouristSection(onTap: () => orderCubit.addTourist()),
                     PriceDetails(
@@ -119,21 +117,28 @@ class _OrderScreenState extends State<OrderScreen> {
     );
   }
 
-  List<Widget> _tourists(
+  Widget _tourists(
     AppLocalizations lc, {
     required OrderCubit orderCubit,
   }) {
     final tourists = orderCubit.state.tourists;
-    return tourists.asMap().entries.map((entry) {
-      final index = entry.key;
-      final tourist = entry.value;
-      final adjective = getCountMasculineAdjectives()[index + 1];
-      return TouristInfo(
-        key: ValueKey(tourist.id),
-        title: '$adjective ${lc.tourist}',
-        isRemovable: index != 0,
-        onRemoveTap: () => orderCubit.removeTourist(tourist),
-      );
-    }).toList();
+    return AnimatedSize(
+      alignment: Alignment.topCenter,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOutCubicEmphasized,
+      child: Column(
+        children: tourists.asMap().entries.map((entry) {
+          final index = entry.key;
+          final tourist = entry.value;
+          final adjective = getCountMasculineAdjectives()[index + 1];
+          return TouristInfo(
+            key: ValueKey(tourist.id),
+            title: '$adjective ${lc.tourist}',
+            isRemovable: index != 0,
+            onRemoveTap: () => orderCubit.removeTourist(tourist),
+          );
+        }).toList(),
+      ),
+    );
   }
 }
