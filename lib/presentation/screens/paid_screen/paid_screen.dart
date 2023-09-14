@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../common/common.dart';
@@ -12,12 +13,13 @@ class PaidScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lc = AppLocalizations.of(context)!;
     final orderNumber = random.nextInt(10000);
 
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Заказ оплачен', style: Styles.appBarTitle),
+        title: Text(lc.paidScreenName, style: Styles.appBarTitle),
       ),
       body: Column(
         children: [
@@ -38,16 +40,17 @@ class PaidScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 32),
-                    const Text(
-                      'Ваш заказ принят в работу',
+                    Text(
+                      lc.paidOrderReceived,
                       style: Styles.title,
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 20),
                     Text(
-                        'Подтверждение заказа №$orderNumber может занять некоторое время (от 1 часа до суток). Как только мы получим ответ от туроператора, вам на почту придет уведомление.',
-                        style: Styles.bodyGrey,
-                        textAlign: TextAlign.center),
+                      lc.paidDescription(orderNumber),
+                      style: Styles.bodyGrey,
+                      textAlign: TextAlign.center,
+                    ),
                   ],
                 ),
               ),
@@ -55,7 +58,7 @@ class PaidScreen extends StatelessWidget {
           ),
           BottomPlate(
             child: ActionButton(
-              title: 'Супер!',
+              title: lc.paidFinishButton,
               onTap: () => context.go('/hotel'),
             ),
           ),

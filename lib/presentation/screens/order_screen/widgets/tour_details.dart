@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../domain/models/models.dart';
 import '../../../common/common.dart';
@@ -10,6 +11,7 @@ class TourDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lc = AppLocalizations.of(context)!;
     const rowSpacer = TableRow(
       children: [
         SizedBox(height: 16),
@@ -25,21 +27,21 @@ class TourDetails extends StatelessWidget {
         children: [
           TableRow(
             children: [
-              const Text('Вылет из', style: Styles.bodyGrey),
+              Text(lc.tourDeparture, style: Styles.bodyGrey),
               Text(order.departure, style: Styles.bodyBlack),
             ],
           ),
           rowSpacer,
           TableRow(
             children: [
-              const Text('Страна, город', style: Styles.bodyGrey),
+              Text(lc.tourArrival, style: Styles.bodyGrey),
               Text(order.arrival, style: Styles.bodyBlack),
             ],
           ),
           rowSpacer,
           TableRow(
             children: [
-              const Text('Даты', style: Styles.bodyGrey),
+              Text(lc.tourDates, style: Styles.bodyGrey),
               Text(
                 '${order.tourDateStart}−${order.tourDateEnd}',
                 style: Styles.bodyBlack,
@@ -49,29 +51,29 @@ class TourDetails extends StatelessWidget {
           rowSpacer,
           TableRow(
             children: [
-              const Text('Кол-во ночей', style: Styles.bodyGrey),
-              Text('${order.nightsCount} ночей', style: Styles.bodyBlack),
-              // TODO add plurals
+              Text(lc.tourNights, style: Styles.bodyGrey),
+              Text(lc.tourNightsCount(order.nightsCount),
+                  style: Styles.bodyBlack),
             ],
           ),
           rowSpacer,
           TableRow(
             children: [
-              const Text('Отель', style: Styles.bodyGrey),
+              Text(lc.tourHotel, style: Styles.bodyGrey),
               Text(order.hotelName, style: Styles.bodyBlack),
             ],
           ),
           rowSpacer,
           TableRow(
             children: [
-              const Text('Номер', style: Styles.bodyGrey),
+              Text(lc.tourRoom, style: Styles.bodyGrey),
               Text(order.roomName, style: Styles.bodyBlack),
             ],
           ),
           rowSpacer,
           TableRow(
             children: [
-              const Text('Питание', style: Styles.bodyGrey),
+              Text(lc.tourNutrition, style: Styles.bodyGrey),
               Text(order.nutrition, style: Styles.bodyBlack),
             ],
           ),

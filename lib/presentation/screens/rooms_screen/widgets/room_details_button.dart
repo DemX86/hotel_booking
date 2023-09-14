@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../common/common.dart';
 
@@ -12,6 +13,7 @@ class RoomDetailsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lc = AppLocalizations.of(context)!;
     return Material(
       color: lightBlueColor,
       borderRadius: BorderRadius.circular(5),
@@ -23,7 +25,7 @@ class RoomDetailsButton extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('Подробнее о номере', style: Styles.roomDetailsButton),
+              Text(lc.roomDetailsButton, style: Styles.roomDetailsButton),
               const SizedBox(width: 2),
               Padding(
                 padding: const EdgeInsets.only(

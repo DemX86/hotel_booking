@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'common.dart';
 
@@ -33,6 +34,7 @@ class _CommonFutureBuilderState<T> extends State<CommonFutureBuilder<T>> {
 
   @override
   Widget build(BuildContext context) {
+    final lc = AppLocalizations.of(context)!;
     return FutureBuilder(
       future: _future,
       builder: (context, snapshot) {
@@ -51,8 +53,8 @@ class _CommonFutureBuilderState<T> extends State<CommonFutureBuilder<T>> {
                   size: 48,
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  'Не удалось загрузить данные.\nПроверьте подключение к сети\nи попробуйте ещё раз',
+                Text(
+                  lc.futureLoadingError,
                   style: Styles.formHelper,
                   textAlign: TextAlign.center,
                 ),
@@ -63,7 +65,7 @@ class _CommonFutureBuilderState<T> extends State<CommonFutureBuilder<T>> {
                       _future = widget.futureFactory();
                     });
                   },
-                  child: const Text('Перезагрузить'),
+                  child: Text(lc.futureReload),
                 ),
               ],
             ),

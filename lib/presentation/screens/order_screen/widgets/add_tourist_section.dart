@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../common/common.dart';
 
@@ -9,11 +10,12 @@ class AddTouristSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lc = AppLocalizations.of(context)!;
     return SectionPlate(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text('Добавить туриста', style: Styles.title),
+          Text(lc.touristAdd, style: Styles.title),
           _addButton(),
         ],
       ),

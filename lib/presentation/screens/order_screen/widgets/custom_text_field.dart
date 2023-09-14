@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../common/common.dart';
 
@@ -27,6 +28,7 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lc = AppLocalizations.of(context)!;
     return Card(
       margin: const EdgeInsets.only(top: 8),
       color: const Color(0xfff6f6f9),
@@ -50,7 +52,7 @@ class CustomTextField extends StatelessWidget {
           style: Styles.textField,
           textCapitalization: textCapitalization,
           validator: validator ??
-              (value) => value!.length < length ? 'Заполните поле' : null,
+              (value) => value!.length < length ? lc.touristFieldError : null,
         ),
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_booking/domain/models/models.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../utils/constants.dart';
+import '../../../../domain/models/models.dart';
 import '../../../common/common.dart';
 
 class PriceDetails extends StatelessWidget {
@@ -16,6 +16,7 @@ class PriceDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lc = AppLocalizations.of(context)!;
     const rowSpacer = TableRow(
       children: [
         SizedBox(height: 16),
@@ -27,29 +28,29 @@ class PriceDetails extends StatelessWidget {
         children: [
           TableRow(
             children: [
-              const Text('Тур', style: Styles.bodyGrey),
-              _priceText(order.tourPrice),
+              Text(lc.tourCorePrice, style: Styles.bodyGrey),
+              _priceText(lc, order.tourPrice),
             ],
           ),
           rowSpacer,
           TableRow(
             children: [
-              const Text('Топливный сбор', style: Styles.bodyGrey),
-              _priceText(order.fuelCharge),
+              Text(lc.tourFuelCharge, style: Styles.bodyGrey),
+              _priceText(lc, order.fuelCharge),
             ],
           ),
           rowSpacer,
           TableRow(
             children: [
-              const Text('Сервисный сбор', style: Styles.bodyGrey),
-              _priceText(order.serviceCharge),
+              Text(lc.tourServiceCharge, style: Styles.bodyGrey),
+              _priceText(lc, order.serviceCharge),
             ],
           ),
           rowSpacer,
           TableRow(
             children: [
-              const Text('К оплате', style: Styles.bodyGrey),
-              _priceText(totalPrice, style: Styles.priceTotal),
+              Text(lc.tourPriceTotal, style: Styles.bodyGrey),
+              _priceText(lc, totalPrice, style: Styles.priceTotal),
             ],
           ),
         ],
@@ -57,9 +58,13 @@ class PriceDetails extends StatelessWidget {
     );
   }
 
-  Text _priceText(double price, {style = Styles.bodyBlack}) {
+  Text _priceText(
+    AppLocalizations lc,
+    double price, {
+    style = Styles.bodyBlack,
+  }) {
     return Text(
-      '${numberFormat.format(price.round())} ₽',
+      lc.tourPriceText(price),
       style: style,
       textAlign: TextAlign.end,
     );

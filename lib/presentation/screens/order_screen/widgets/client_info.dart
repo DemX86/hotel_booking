@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../../../common/common.dart';
@@ -29,11 +30,12 @@ class _ClientInfoState extends State<ClientInfo> {
 
   @override
   Widget build(BuildContext context) {
+    final lc = AppLocalizations.of(context)!;
     return SectionPlate(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Информация о покупателе', style: Styles.title),
+          Text(lc.tourClientInfo, style: Styles.title),
           const SizedBox(height: 12),
           Form(
             key: widget.phoneNumberFormKey,
@@ -50,7 +52,7 @@ class _ClientInfoState extends State<ClientInfo> {
                 inputFormatters: [_phoneNumberMask],
                 hint: '+7 *** *** **-**',
                 keyboardType: TextInputType.phone,
-                label: 'Номер телефона',
+                label: lc.tourClientPhoneNumber,
                 length: 16,
               ),
             ),
@@ -69,21 +71,18 @@ class _ClientInfoState extends State<ClientInfo> {
                 controller: _emailController,
                 hint: 'mail@example.com',
                 keyboardType: TextInputType.emailAddress,
-                label: 'Почта',
+                label: lc.tourClientEmail,
                 textCapitalization: TextCapitalization.none,
                 validator: (value) {
                   return !EmailValidator.validate(value!)
-                      ? 'Почта не похожа на настоящую'
+                      ? lc.tourCLientEmailError
                       : null;
                 },
               ),
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
-            'Данные никому не передаются. После оплаты мы вышлем чек на указанный вами номер и почту',
-            style: Styles.formHelper,
-          )
+          Text(lc.tourClientInfoPrivacy, style: Styles.formHelper)
         ],
       ),
     );

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../data/repositories/api_repository.dart';
 import '../../../domain/models/models.dart';
-import '../../../utils/constants.dart';
 import '../../common/common.dart';
 import 'widgets/room_details_button.dart';
 
@@ -32,6 +32,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final lc = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: CommonAppBar(title: widget.hotelName),
       body: CommonFutureBuilder(
@@ -61,7 +62,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            '${numberFormat.format(room.price.round())} ₽',
+                            lc.roomPrice(room.price),
                             style: Styles.price,
                           ),
                           const SizedBox(width: 8),
@@ -79,7 +80,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
                       ),
                       const SizedBox(height: 16),
                       ActionButton(
-                        title: 'Выбрать номер',
+                        title: lc.roomToOrderButton,
                         onTap: () => context.push('/booking'),
                       ),
                     ],

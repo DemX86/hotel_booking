@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../domain/models/hotel_model.dart';
 import '../../../common/common.dart';
@@ -11,11 +12,12 @@ class About extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lc = AppLocalizations.of(context)!;
     return SectionPlate(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Об отеле', style: Styles.title),
+          Text(lc.hotelAbout, style: Styles.title),
           const SizedBox(height: 8),
           Peculiarities(hotel.peculiarities),
           const SizedBox(height: 4),

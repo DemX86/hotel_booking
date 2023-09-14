@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../../../common/common.dart';
 import 'custom_text_field.dart';
+
+const dateMask = '##.##.####';
+const intlPassportIdMask = '## #######';
 
 class TouristInfo extends StatefulWidget {
   final String title;
@@ -30,15 +34,15 @@ class _TouristInfoState extends State<TouristInfo> {
   late TextEditingController _intlPassportIdController;
   late TextEditingController _intlPassportValidUntilController;
   final _birthdateMask = MaskTextInputFormatter(
-    mask: '##.##.####',
+    mask: dateMask,
     type: MaskAutoCompletionType.eager,
   );
   final _intlPassportIdMask = MaskTextInputFormatter(
-    mask: '## #######',
+    mask: intlPassportIdMask,
     type: MaskAutoCompletionType.eager,
   );
   final _intlPassportValidUntilMask = MaskTextInputFormatter(
-    mask: '##.##.####',
+    mask: dateMask,
     type: MaskAutoCompletionType.eager,
   );
 
@@ -67,6 +71,7 @@ class _TouristInfoState extends State<TouristInfo> {
 
   @override
   Widget build(BuildContext context) {
+    final lc = AppLocalizations.of(context)!;
     return SectionPlate(
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 500),
@@ -77,7 +82,7 @@ class _TouristInfoState extends State<TouristInfo> {
               children: [
                 Text(widget.title, style: Styles.title),
                 const Spacer(),
-                if (_isExpanded && widget.isRemovable) _removeButton(),
+                if (_isExpanded && widget.isRemovable) _removeButton(lc),
                 _expandButton(),
               ],
             ),
@@ -89,37 +94,37 @@ class _TouristInfoState extends State<TouristInfo> {
                   const SizedBox(height: 9),
                   CustomTextField(
                     controller: _firstNameController,
-                    label: 'Имя',
+                    label: lc.touristFirstName,
                   ),
                   CustomTextField(
                     controller: _secondNameController,
-                    label: 'Фамилия',
+                    label: lc.touristSecondName,
                   ),
                   CustomTextField(
                     controller: _birthdateController,
-                    hint: 'DD.MM.YYYY',
+                    hint: lc.touristDateHint,
                     inputFormatters: [_birthdateMask],
                     keyboardType: TextInputType.number,
-                    label: 'Дата рождения',
+                    label: lc.touristBirthdate,
                     length: 10,
                   ),
                   CustomTextField(
                     controller: _nationalityController,
-                    label: 'Гражданство',
+                    label: lc.touristNationality,
                   ),
                   CustomTextField(
                     controller: _intlPassportIdController,
                     inputFormatters: [_intlPassportIdMask],
                     keyboardType: TextInputType.number,
-                    label: 'Номер загранпаспорта',
+                    label: lc.touristIntlPassportId,
                     length: 10,
                   ),
                   CustomTextField(
                     controller: _intlPassportValidUntilController,
-                    hint: 'DD.MM.YYYY',
+                    hint: lc.touristDateHint,
                     inputFormatters: [_intlPassportValidUntilMask],
                     keyboardType: TextInputType.number,
-                    label: 'Срок действия загранпаспорта',
+                    label: lc.touristIntlPassportValidUntil,
                     length: 10,
                   ),
                 ],
@@ -131,7 +136,7 @@ class _TouristInfoState extends State<TouristInfo> {
     );
   }
 
-  Widget _removeButton() {
+  Widget _removeButton(AppLocalizations lc) {
     return Padding(
       padding: const EdgeInsets.only(right: 8),
       child: Material(
@@ -143,21 +148,21 @@ class _TouristInfoState extends State<TouristInfo> {
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  title: const Text('Удалить туриста?'),
-                  content: const Text('Отменить это действие будет невозможно'),
+                  title: Text(lc.touristDialogTitle),
+                  content: Text(lc.touristDialogContent),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.pop(context, false),
-                      child: const Text(
-                        'Отмена',
-                        style: TextStyle(fontWeight: FontWeight.w400),
+                      child: Text(
+                        lc.touristDialogCancel,
+                        style: const TextStyle(fontWeight: FontWeight.w400),
                       ),
                     ),
                     TextButton(
                       onPressed: () => Navigator.pop(context, true),
-                      child: const Text(
-                        'Удалить',
-                        style: TextStyle(fontWeight: FontWeight.w600),
+                      child: Text(
+                        lc.touristDialogOk,
+                        style: const TextStyle(fontWeight: FontWeight.w600),
                       ),
                     ),
                   ],

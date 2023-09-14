@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -27,8 +28,9 @@ class _HotelScreenState extends State<HotelScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final lc = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: const CommonAppBar(title: 'Отель'),
+      appBar: CommonAppBar(title: lc.hotelScreenName),
       body: CommonFutureBuilder(
         futureFactory: _loadHotelFutureFactory,
         builder: (context, hotel) {
@@ -54,7 +56,7 @@ class _HotelScreenState extends State<HotelScreen> {
               ),
               BottomPlate(
                 child: ActionButton(
-                  title: 'К выбору номера',
+                  title: lc.hotelToRoomsButton,
                   onTap: () => context.push('/rooms', extra: hotel.name),
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../data/repositories/api_repository.dart';
@@ -37,27 +38,27 @@ class _OrderScreenState extends State<OrderScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final lc = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: const CommonAppBar(title: 'Бронирование'),
+      appBar: CommonAppBar(title: lc.orderScreenName),
       body: BlocProvider(
         create: (_) => OrderCubit(),
         child: CommonFutureBuilder(
           futureFactory: _loadOrderFutureFactory,
-          builder: (_, order) => _content(order),
+          builder: (_, order) => _content(lc, order),
         ),
       ),
     );
   }
 
-  Widget _content(OrderModel order) {
+  Widget _content(AppLocalizations lc, OrderModel order) {
     final totalPrice = order.tourPrice + order.fuelCharge + order.serviceCharge;
     return BlocConsumer<OrderCubit, OrderState>(
       bloc: orderCubit,
       listener: (context, state) {
         if (state.touristCountExceeded) {
-          const snackBar = SnackBar(
-            content: Text('Можно добавить не больше десяти туристов'),
-          );
+          final snackBar =
+              SnackBar(content: Text(lc.touristsCountLimitMessage));
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
       },
@@ -85,7 +86,7 @@ class _OrderScreenState extends State<OrderScreen> {
                     Form(
                       key: _formKey,
                       child: Column(
-                        children: _tourists(orderCubit: orderCubit),
+                        children: _tourists(lc, orderCubit: orderCubit),
                       ),
                     ),
                     AddTouristSection(onTap: () => orderCubit.addTourist()),
@@ -99,7 +100,7 @@ class _OrderScreenState extends State<OrderScreen> {
             ),
             BottomPlate(
               child: ActionButton(
-                title: 'Оплатить ${numberFormat.format(totalPrice.round())} ₽',
+                title: lc.orderToPaidButton(totalPrice),
                 onTap: () {
                   final formStatuses = [
                     _formKey.currentState!.validate(),
@@ -118,14 +119,18 @@ class _OrderScreenState extends State<OrderScreen> {
     );
   }
 
-  List<Widget> _tourists({required OrderCubit orderCubit}) {
+  List<Widget> _tourists(
+    AppLocalizations lc, {
+    required OrderCubit orderCubit,
+  }) {
     final tourists = orderCubit.state.tourists;
     return tourists.asMap().entries.map((entry) {
       final index = entry.key;
       final tourist = entry.value;
+      final adjective = getCountMasculineAdjectives()[index + 1];
       return TouristInfo(
         key: ValueKey(tourist.id),
-        title: '${countMasculineAdjectives[index + 1]} турист',
+        title: '$adjective ${lc.tourist}',
         isRemovable: index != 0,
         onRemoveTap: () => orderCubit.removeTourist(tourist),
       );

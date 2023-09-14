@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'data/repositories/api_repository.dart';
 import 'router.dart';
@@ -15,6 +17,15 @@ class App extends StatelessWidget {
     return RepositoryProvider(
       create: (_) => ApiRepository(),
       child: MaterialApp.router(
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('ru'),
+        ],
         routerConfig: router,
         title: 'Hotel Booking',
         theme: theme,
@@ -22,5 +33,3 @@ class App extends StatelessWidget {
     );
   }
 }
-
-// TODO i18

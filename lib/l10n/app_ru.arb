@@ -1,0 +1,115 @@
+{
+    "@@locale": "ru",
+    "hotelScreenName": "Отель",
+    "hotelPriceFrom": "от {priceFrom} ₽",
+    "@hotelPriceFrom": {
+        "placeholders": {
+            "priceFrom": {
+                "type": "double",
+                "format": "decimalPattern",
+                "optionalParameters": {
+                    "decimalDigits": 0
+                }
+            }
+        }
+    },
+    "hotelAbout": "Об отеле",
+    "hotelFacilities": "Удобства",
+    "hotelMostNecessary": "Самое необходимое",
+    "hotelIncludes": "Что включено",
+    "hotelExclude": "Что не включено",
+    "hotelToRoomsButton": "К выбору номера",
+    "roomDetailsButton": "Подробнее о номере",
+    "roomPrice": "{price} ₽",
+    "@roomPrice": {
+        "placeholders": {
+            "price": {
+                "type": "double",
+                "format": "decimalPattern"
+            }
+        }
+    },
+    "roomToOrderButton": "Выбрать номер",
+    "orderScreenName": "Бронирование",
+    "tourDeparture": "Вылет из",
+    "tourArrival": "Страна, город",
+    "tourDates": "Даты",
+    "tourNights": "Кол-во ночей",
+    "tourNightsCount": "{count} {count, plural, =1{ночь} few{ночи} other{ночей}}",
+    "@tourNightsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "tourHotel": "Отель",
+    "tourRoom": "Номер",
+    "tourNutrition": "Питание",
+    "tourClientInfo": "Информация о покупателе",
+    "tourClientPhoneNumber": "Номер телефона",
+    "tourClientEmail": "Почта",
+    "tourCLientEmailError": "Почта не похожа на настоящую",
+    "tourClientInfoPrivacy": "Данные никому не передаются. После оплаты мы вышлем чек на указанный вами номер и почту",
+    "touristFirstName": "Имя",
+    "touristSecondName": "Фамилия",
+    "touristBirthdate": "Дата рождения",
+    "touristDateHint": "ДД.ММ.ГГГГ",
+    "touristNationality": "Гражданство",
+    "touristIntlPassportId": "Номер загранпаспорта",
+    "touristIntlPassportValidUntil": "Срок действия загранпаспорта",
+    "touristDialogTitle": "Удалить туриста?",
+    "touristDialogContent": "Отменить это действие будет невозможно",
+    "touristDialogCancel": "Отмена",
+    "touristDialogOk": "Удалить",
+    "touristFieldError": "Заполните поле",
+    "touristAdd": "Добавить туриста",
+    "orderToPaidButton": "Оплатить {price} ₽",
+    "@orderToPaidButton": {
+        "placeholders": {
+            "price": {
+                "type": "double",
+                "format": "decimalPattern"
+            }
+        }
+    },
+    "touristsCountLimitMessage": "Можно добавить не больше десяти туристов",
+    "tourCorePrice": "Тур",
+    "tourFuelCharge": "Топливный сбор",
+    "tourServiceCharge": "Сервисный сбор",
+    "tourPriceTotal": "К оплате",
+    "tourPriceText": "{price} ₽",
+    "@tourPriceText": {
+        "placeholders": {
+            "price": {
+                "type": "double",
+                "format": "decimalPattern"
+            }
+        }
+    },
+    "paidScreenName": "Заказ оплачен",
+    "paidOrderReceived": "Ваш заказ принят в работу",
+    "paidDescription": "Подтверждение заказа {orderNumber} может занять некоторое время (от 1 часа до суток). Как только мы получим ответ от туроператора, вам на почту придет уведомление.",
+    "@paidDescription": {
+        "placeholders": {
+            "orderNumber": {
+                "type": "int"
+            }
+        }
+    },
+    "paidFinishButton": "Супер!",
+    "imageLoadingError": "Не удалось\nзагрузить изображение",
+    "futureLoadingError": "Не удалось загрузить данные.\nПроверьте подключение к сети\nи попробуйте ещё раз",
+    "futureReload": "Перезагрузить",
+    "first": "Первый",
+    "second": "Второй",
+    "third": "Третий",
+    "fourth": "Четвёртый",
+    "fifth": "Пятый",
+    "sixth": "Шестой",
+    "seventh": "Седьмой",
+    "eighth": "Восьмой",
+    "ninth": "Девятый",
+    "tenth": "Десятый",
+    "tourist": "турист"
+}

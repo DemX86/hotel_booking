@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'common.dart';
 
@@ -23,6 +24,7 @@ class _CarouselState extends State<Carousel> {
 
   @override
   Widget build(BuildContext context) {
+    final lc = AppLocalizations.of(context)!;
     final imageCount = widget.imageUrls.length;
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
@@ -55,22 +57,22 @@ class _CarouselState extends State<Carousel> {
                       },
                       errorBuilder: (_, error, ___) {
                         debugPrint('Image loading error: $error');
-                        return const Center(
+                        return Center(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.image_not_supported_outlined,
                                 color: greyColor,
                                 size: 48,
                               ),
-                              SizedBox(height: 8),
+                              const SizedBox(height: 8),
                               Text(
-                                'Не удалось\nзагрузить изображение',
+                                lc.imageLoadingError,
                                 style: Styles.formHelper,
                                 textAlign: TextAlign.center,
                               ),
-                              SizedBox(height: 50),
+                              const SizedBox(height: 50),
                             ],
                           ),
                         );

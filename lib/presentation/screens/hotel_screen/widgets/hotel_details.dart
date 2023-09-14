@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../common/common.dart';
 
@@ -7,28 +8,29 @@ class HotelDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lc = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Column(
         children: [
           DetailsButton(
             imagePath: 'assets/images/happy.png',
-            title: 'Удобства',
-            subtitle: 'Самое необходимое',
+            title: lc.hotelFacilities,
+            subtitle: lc.hotelMostNecessary,
             onTap: () {},
           ),
           const DetailsButtonDivider(),
           DetailsButton(
             imagePath: 'assets/images/tick.png',
-            title: 'Что включено',
-            subtitle: 'Самое необходимое',
+            title: lc.hotelIncludes,
+            subtitle: lc.hotelMostNecessary,
             onTap: () {},
           ),
           const DetailsButtonDivider(),
           DetailsButton(
             imagePath: 'assets/images/close.png',
-            title: 'Что не включено',
-            subtitle: 'Самое необходимое',
+            title: lc.hotelExclude,
+            subtitle: lc.hotelMostNecessary,
             onTap: () {},
           ),
         ],

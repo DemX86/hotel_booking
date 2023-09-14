@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../domain/models/hotel_model.dart';
-import '../../../../utils/constants.dart';
 import '../../../common/common.dart';
 
 class Face extends StatelessWidget {
@@ -11,6 +11,7 @@ class Face extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lc = AppLocalizations.of(context)!;
     return Container(
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.vertical(bottom: Radius.circular(12)),
@@ -34,8 +35,7 @@ class Face extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text('от ${numberFormat.format(hotel.priceFrom.round())} ₽',
-                  style: Styles.price),
+              Text(lc.hotelPriceFrom(hotel.priceFrom), style: Styles.price),
               const SizedBox(width: 8),
               Expanded(
                 child: Padding(
