@@ -68,7 +68,9 @@ class HotelRating extends StatelessWidget {
             width: 15,
             height: 15,
           ),
-          Text('$rating $ratingName', style: Styles.rating),
+          Text(rating.toString(), style: Styles.rating),
+          const SizedBox(width: 4),
+          Text(ratingName, style: Styles.rating),
         ],
       ),
     );
