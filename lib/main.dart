@@ -17,6 +17,7 @@ class App extends StatelessWidget {
     return RepositoryProvider(
       create: (_) => ApiRepository(),
       child: MaterialApp.router(
+        locale: const Locale('ru'),
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
