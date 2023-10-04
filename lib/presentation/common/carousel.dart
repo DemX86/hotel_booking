@@ -13,8 +13,23 @@ class Carousel extends StatefulWidget {
 }
 
 class _CarouselState extends State<Carousel> {
+  late List<Image> images;
   final _pageController = PageController(viewportFraction: 1.05);
   var _currentPageIndex = 0;
+
+  @override
+  void initState() {
+    images = createImages();
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    for (final image in images) {
+      precacheImage(image.image, context);
+    }
+    super.didChangeDependencies();
+  }
 
   @override
   void dispose() {
@@ -24,7 +39,6 @@ class _CarouselState extends State<Carousel> {
 
   @override
   Widget build(BuildContext context) {
-    final lc = AppLocalizations.of(context)!;
     final imageCount = widget.imageUrls.length;
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
@@ -41,43 +55,7 @@ class _CarouselState extends State<Carousel> {
                   widthFactor: 1 / _pageController.viewportFraction,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
-                    child: Image.network(
-                      fit: BoxFit.cover,
-                      widget.imageUrls[index],
-                      loadingBuilder: (_, child, loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return Center(
-                          child: CircularProgressIndicator(
-                            value: loadingProgress.expectedTotalBytes != null
-                                ? loadingProgress.cumulativeBytesLoaded /
-                                    loadingProgress.expectedTotalBytes!
-                                : null,
-                          ),
-                        );
-                      },
-                      errorBuilder: (_, error, ___) {
-                        debugPrint('Image loading error: $error');
-                        return Center(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Icon(
-                                Icons.image_not_supported_outlined,
-                                color: greyColor,
-                                size: 48,
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                lc.imageLoadingError,
-                                style: Styles.formHelper,
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(height: 50),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
+                    child: images[index],
                   ),
                 );
               },
@@ -116,5 +94,49 @@ class _CarouselState extends State<Carousel> {
         ],
       ),
     );
+  }
+
+  List<Image> createImages() {
+    final images = widget.imageUrls.map((imageUrl) {
+      return Image.network(
+        fit: BoxFit.cover,
+        imageUrl,
+        loadingBuilder: (_, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+          return Center(
+            child: CircularProgressIndicator(
+              value: loadingProgress.expectedTotalBytes != null
+                  ? loadingProgress.cumulativeBytesLoaded /
+                      loadingProgress.expectedTotalBytes!
+                  : null,
+            ),
+          );
+        },
+        errorBuilder: (context, error, ___) {
+          final lc = AppLocalizations.of(context)!;
+          debugPrint('Image loading error: $error');
+          return Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(
+                  Icons.image_not_supported_outlined,
+                  color: greyColor,
+                  size: 48,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  lc.imageLoadingError,
+                  style: Styles.formHelper,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 50),
+              ],
+            ),
+          );
+        },
+      );
+    }).toList();
+    return images;
   }
 }
